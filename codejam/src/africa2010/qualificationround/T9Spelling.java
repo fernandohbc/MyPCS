@@ -1,4 +1,4 @@
-/*******************************************************************************
+/* 
  * MyPCS - My Programming Contests Solutions
  * 
  * Copyright (C) 2007 - 2011  Fernando Cardoso
@@ -17,7 +17,7 @@
  * If you find this a little useful, you can buy the author some beer.
  * If you find this really useful, you can buy a kid a book, and help making
  * the world more literate.
- ******************************************************************************/
+ */
 package africa2010.qualificationround;
 
 import java.util.Scanner;
