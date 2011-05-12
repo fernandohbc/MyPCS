@@ -35,28 +35,16 @@ public class GoroSort {
         for (int tc = 1; tc <= t; tc++) {
             int n = scn.nextInt();
 
-            double avgHits = 0;
             int misplacesCount = 0;
-            int maxRead = 0;
             for (int i = 1; i <= n; i++) {
                 int x = scn.nextInt();
 
                 if (x != i) {
                     misplacesCount++;
                 }
-
-                if (n == maxRead) {
-                    avgHits += misplacesCount;
-                    misplacesCount = 0;
-                    maxRead = 0;
-                } else if (x > maxRead) {
-                    maxRead = x;
-                }
             }
 
-            avgHits += misplacesCount;
-
-            System.out.printf("Case #%d: %.6f\n", tc, avgHits);
+            System.out.printf("Case #%d: %.6f\n", tc, misplacesCount);
         }
     }
 }
