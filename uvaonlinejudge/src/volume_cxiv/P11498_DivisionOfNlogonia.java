@@ -31,6 +31,7 @@ public class P11498_DivisionOfNlogonia {
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
         int pt = scn.nextInt();
+        StringBuilder sb = new StringBuilder();
         while (pt != 0) {
             int x = scn.nextInt();
             int y = scn.nextInt();
@@ -40,19 +41,19 @@ public class P11498_DivisionOfNlogonia {
                 int yp = scn.nextInt();
 
                 if (xp == x || yp == y) {
-                    System.out.println("divisa");
+                    sb.append("divisa\n");
                 } else {
                     if (xp < x) {
                         if (yp < y) {
-                            System.out.println("SO");
+                            sb.append("SO\n");
                         } else {
-                            System.out.println("NO");
+                            sb.append("NO\n");
                         }
                     } else {
                         if (yp < y) {
-                            System.out.println("SE");
+                            sb.append("SE\n");
                         } else {
-                            System.out.println("NE");
+                            sb.append("NE\n");
                         }
                     }
                 }
@@ -60,5 +61,6 @@ public class P11498_DivisionOfNlogonia {
 
             pt = scn.nextInt();
         }
+        System.out.println(sb.toString().trim());
     }
 }
