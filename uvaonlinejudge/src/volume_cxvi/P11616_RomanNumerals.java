@@ -133,6 +133,6 @@ public class P11616_RomanNumerals {
 
     private static char getChar(int i) {
         // TODO Auto-generated method stub
-        return null;
+        return '0';
     }
 }
