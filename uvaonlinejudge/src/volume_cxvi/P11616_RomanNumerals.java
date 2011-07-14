@@ -85,29 +85,16 @@ public class P11616_RomanNumerals {
         StringBuilder sb = new StringBuilder();
 
         int mils = i / 1000;
-        for (int k = 0; k < mils; k++) {
-            sb.append('M');
-        }
+        append(sb, mils, 1000);
 
         int cents = (i / 100) % 10;
-        while (cents > 0) {
-            if (cents == 9) {
-                sb.append("CM");
-                cents = 0;
-            } else if (cents >= 5) {
-                sb.append('D');
-                cents -= 5;
-            } else if (cents == 4) {
-                sb.append("CD");
-                cents = 0;
-            } else {
-                sb.append('C');
-                cents--;
-            }
-        }
+        append(sb, cents, 100);
 
         int tens = (i / 10) % 10;
         append(sb, tens, 10);
+
+        int ones = i % 10;
+        append(sb, ones, 1);
 
         return sb.toString();
     }
@@ -119,20 +106,37 @@ public class P11616_RomanNumerals {
                 sb.append(getChar(multiplier * 10));
                 value = 0;
             } else if (value >= 5) {
-                sb.append('L');
+                sb.append(getChar(multiplier * 5));
                 value -= 5;
             } else if (value == 4) {
-                sb.append("XL");
+                sb.append(getChar(multiplier));
+                sb.append(getChar(multiplier * 5));
                 value = 0;
             } else {
-                sb.append('X');
+                sb.append(getChar(multiplier));
                 value--;
             }
         }
     }
 
     private static char getChar(int i) {
-        // TODO Auto-generated method stub
-        return '0';
+        switch (i) {
+        case 1:
+            return 'I';
+        case 5:
+            return 'V';
+        case 10:
+            return 'X';
+        case 50:
+            return 'L';
+        case 100:
+            return 'C';
+        case 500:
+            return 'D';
+        case 1000:
+            return 'M';
+        default:
+            return '0';
+        }
     }
 }
