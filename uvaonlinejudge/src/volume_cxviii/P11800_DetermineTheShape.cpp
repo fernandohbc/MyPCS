@@ -26,40 +26,38 @@
  */
 
 #include <iostream>
+#include <vector>
+#include <math.h>
 
-#define EPSILON = 1e-15;
+#define EPSILON  1e-15
 
 using namespace std;
 
 struct Point {
   int x; int y;
-}
+};
 
 struct Segment {
   Point p1; Point p2;
+};
+
+double getAngle(Segment s1, Segment s2, double norm1, double norm2) {
+  double pi = (s1.p1.x - s1.p2.x)*(s2.p1.x-s2.p2.x) + (s1.p1.y-s1.p2.y)*(s2.p1.y-s2.p2.y);
+  double angle = acos(pi / (norm1 * norm2));
+  return angle;
 }
 
-    private static double getAngle(Line2D l1, Line2D l2, double d1, double d2) {
-        double pi = (l1.getX2() - l1.getX1()) * (l2.getX2() - l2.getX1())
-                + (l1.getY2() - l1.getY1()) * (l2.getY2() - l2.getY1());
-        double angle = Math.acos(pi / (d1 * d2));
-        return angle;
-    }
+bool allSame(double d[]) {
+  return d[0] == d[1] && d[0] == d[2] && d[0] == d[3];
+}
 
-    private static boolean allSame(double[] d) {
-        return d[0] == d[1] && d[0] == d[2] && d[0] == d[3];
-    }
+void getAngles(Segment segments[], double sizes[], double angles[]) {
+  for (int i = 0; i < 4; i++) {
+    angles[i] = getAngle(segments[i], segments[(i + 1) % 4], sizes[i], sizes[(i + 1) % 4]);
+  }
+}
 
-    private static double[] getAngles(List<Line2D> segments, double[] sizes) {
-        double[] result = new double[4];
-        for (int i = 0; i < 4; i++) {
-            result[i] = getAngle(segments.get(i), segments.get((i + 1) % 4),
-                    sizes[i], sizes[(i + 1) % 4]);
-        }
-        return result;
-    }
-
-void getSizes(Segment [] segments, double [] sizes) {
+void getSizes(Segment segments[], double sizes[]) {
   for (int i = 0; i < 4; i++) {
     sizes[i] = (segments[i].p1.x-segments[i].p2.x)*(segments[i].p1.x-segments[i].p2.x);
     sizes[i] += (segments[i].p1.y-segments[i].p2.y)*(segments[i].p1.y-segments[i].p2.y);
@@ -67,46 +65,153 @@ void getSizes(Segment [] segments, double [] sizes) {
   }
 }
 
-void arrangeSegments(Segment [] segments) {
+bool equals(Point p1, Point p2) {
+  return p1.x == p2.x && p1.y == p2.y;
+}
+
+bool isAdjacent(Segment s1, Segment s2) {
+  return equals(s1.p1, s2.p1) || equals(s1.p1, s2.p2) || equals(s1.p2, s2.p1) || equals(s1.p2, s2.p2);
+}
+
+void arrangeSegments(Segment segments[]) {
+  for ( int i = 0; i <=2; i++ ) {
+    int k = i + 1;
+    while (!isAdjacent(segments[i], segments[k])) {
+      k++;
+    }
+    Segment temp = segments[i+1];
+    segments[i+1] = segments[k];
+    segments[k] = temp;
+  }
+}
+
+Point minusPoints(Point p1, Point p2) {
+  Point result;
+  result.x = p1.x-p2.x;
+  result.y = p1.y-p2.y;
+  return result;
+}
+
+double dot(Point p1, Point p2) {
+  return p1.x*p2.x+p1.y*p2.y;
+}
+
+bool areCrossing(Segment ab, Segment cd) {
+  Point e = minusPoints(ab.p2, ab.p1);
+  Point f = minusPoints(cd.p2, cd.p1);
+
+  Point p;
+  p.x = -e.y;
+  p.y = e.x;
+
+  double  h = dot(minusPoints(ab.p1,cd.p1), p) / dot(f, p);
+
+  return h > 0 && h < 1;
+}
+
+double abs(double d) {
+  return d>=0?d:-d;
+}
+
+void print(Point p) {
+  cout << "(" << p.x << ", " << p.y << ")";
+}
+
+void print(Segment s) {
+  cout << "{";
+  print(s.p1);
+  cout << ", ";
+  print(s.p2);
+  cout << "}";
+}
+
+void print(Segment s[]) {
+  cout << "[";
+  for (int i = 0; i < 4; i++ ) {
+    print(s[i]);
+    if ( i < 3 ) {
+      cout << "; ";
+    }
+  }
+  cout << "]" << endl;
 
 }
 
-    private static boolean areCrossing(Line2D s1, Line2D s2) {
-        return s1.intersectsLine(s2) && !s1.getP1().equals(s2.getP1())
-                && !s1.getP1().equals(s2.getP2())
-                && !s1.getP2().equals(s2.getP1())
-                && !s1.getP2().equals(s2.getP2());
+void print(double d[]) {
+  cout << "[";
+  for (int i = 0; i < 4; i++ ) {
+    cout << d[i];
+    if ( i < 3 ) {
+      cout << ", ";
     }
+  }
+  cout << "]" << endl;
+}
 
-void classify(Segment [] segments) {
+bool isVertical(Segment s) {
+  return s.p1.x == s.p2.x;
+}
+
+double slope(Segment s) {
+  // print(s);
+  double result = 1.0*(s.p2.y-s.p1.y)/(s.p2.x-s.p1.x);
+//  cout << " slope is " << result << endl;
+  return result; 
+}
+
+bool parallel(Segment s1, Segment s2) {
+  bool result;
+  if ( isVertical(s1) ) {
+    result = isVertical(s2);
+  } else if ( isVertical(s2) ) {
+    result = false;
+  } else {
+    result = slope(s1) == slope(s2);
+  }
+  
+  //if ( result ) {
+  //  print(s1);
+  //  cout << " and ";
+  //  print(s2);
+  //  cout << " are parallel.";
+  //}
+
+  return result;
+}
+
+void classify(Segment segments[]) {
+//  print(segments);
   arrangeSegments(segments);
+//  print(segments);
   
   double sizes[4];
   getSizes(segments, sizes);
+//  print(sizes);
 
-  double angles[] = getAngles(segments, sizes);
+  double angles[4];
+  getAngles(segments, sizes, angles);
+  // print(angles);
 
   if (allSame(sizes)) {
     if (allSame(angles)) {
       cout << "Square";
+      return;
     } else {
       cout << "Rhombus";
+      return;
     }
   }
 
  if (allSame(angles)) {
-   cout << "Rectangle";
+   cout << "Rectangle"; return;
  }
 
  if (sizes[0] == sizes[2] && sizes[1] == sizes[3]) {
-   cout << "Parallelogram";
+   cout << "Parallelogram"; return;
  }
 
-  if (abs(sin(getAngle(segments.get(0), segments.get(2),
-                sizes[0], sizes[2]))) < EPSILON
-                || abs(sin(getAngle(segments.get(1), segments.get(3),
-                        sizes[1], sizes[3]))) < EPSILON) {
-    cout << "Trapezium";
+  if ( parallel( segments[0], segments[2]) || parallel(segments[1], segments[3])) {
+    cout << "Trapezium"; return;
   }
   cout << "Ordinary Quadrilateral";
 }
@@ -125,8 +230,7 @@ int main() {
 
       cin >> point.x;
       cin >> point.y;
-    
-      for (int pi = 0; pi < p; p++ ) {
+      for (int pi = 0; pi < p; pi++ ) {
         Segment segment;
 
         segment.p1 = points[pi];
@@ -150,8 +254,8 @@ int main() {
     }
 
     Segment segmentArray[4];
-    for ( int i = 0; i < 4; i++ ) {
-      segmentArray[i] = segments[i];
+    for ( int s = 0; s < 4; s++ ) {
+      segmentArray[s] = segments[s];
     }
     
     cout << "Case " << i << ": ";
