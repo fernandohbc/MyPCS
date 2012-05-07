@@ -83,7 +83,7 @@ public class P10591_HappyNumber {
     int tc = scn.nextInt();
     for (int i = 1; i <= tc; i++) {
       int n = scn.nextInt();
-      System.out.println("Case #" + i + ": " + n + " is a " + (isHappy(n)?"Happy":"Unhappy") + " number.");
+      System.out.println("Case #" + i + ": " + n + " is " + (isHappy(n)?"a Happy":"an Unhappy") + " number.");
       // System.out.println("Happy = " + happy);
       // System.out.println("Unhappy = " + unhappy);
     }
