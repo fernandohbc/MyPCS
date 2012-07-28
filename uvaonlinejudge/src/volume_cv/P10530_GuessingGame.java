@@ -29,31 +29,50 @@
  * If you find this really useful, you can buy a kid a book, and help making
  * the world more literate.
  */
-package volume_ix;
+package volume_cv;
+
+import static java.lang.Integer.parseInt;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 import java.util.Scanner;
 
 /**
- * UVa Online Judge Problem #900 - Brick Wall Patterns
- *
+ * UVa Online Judge Problem #10530 - Guessing Game
+ * 
  * @author Fernando Cardoso (fernandohbc@gmail.com)
  */
-public class Main {
-  private static long [] fib = new long[51];
-  static {
-    fib[0] = 1;
-    fib[1] = 1;
-    for (int i = 2; i <= 50; i++) {
-      fib[i] = fib[i-1] + fib[i-2];
-    }
-  }
+public class P10530_GuessingGame {
 
-  public static void main(String [] args) {
-    Scanner scn = new Scanner(System.in);
-    int n = scn.nextInt();
+  private static final String RIGHT_ON = "right on";
+  private static final String TOO_HIGH = "too high";
+
+  private static Scanner scn = new Scanner(System.in);
+
+  public static void main(String[] args) {
+    int n = parseInt(scn.nextLine().trim());
     while (n != 0) {
-      System.out.println(fib[n]);
-      n = scn.nextInt();
+      int upper = 10;
+      int lower = 1;
+
+      String status = scn.nextLine().trim();
+      while (!status.equals(RIGHT_ON)) {
+        if (status.equals(TOO_HIGH)) {
+          upper = min(upper, n - 1);
+        } else {
+          lower = max(lower, n + 1);
+        }
+        n = parseInt(scn.nextLine().trim());
+        status = scn.nextLine().trim();
+      }
+
+      if (n >= lower && n <= upper) {
+        System.out.println("Stan may be honest");
+      } else {
+        System.out.println("Stan is dishonest");
+      }
+
+      n = parseInt(scn.nextLine().trim());
     }
   }
 }
