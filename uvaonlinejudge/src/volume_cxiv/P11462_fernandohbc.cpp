@@ -1,8 +1,18 @@
-/* 
- * MyPCS - My Programming Contests Solutions
+/* MyPCS - My Programming Contests Solutions
+ *
+ * email: fernandohbc@gmail.com
+ * Google+: plus.google.com/117689849496467534996
+ *  
  * 
- * Copyright (C) 2007 - 2011  Fernando Cardoso
- * email: fernandohbc@gmail.com / twitter: fernando_hbc
+ * SPOILER ALERT!
+ * These are the solutions for problems from Programming Contests and Online
+ * Judges. Seeing an accepted code before getting accepted by oneself is uncool.
+ * 
+ * Q: So why are the solutions being made available?
+ * A: For educational purposes only. Some of the problems can be used in Contests
+ * training (even if it is to show how NOT to do :-) ) and also can serve to
+ * compare solutions and algorithms. Also, the author thinks it is cool to have
+ * his code well versioned.
  * 
  * The source code of this program is free software; you can do whatever you
  * want with it since you always keep the name and contact of the original

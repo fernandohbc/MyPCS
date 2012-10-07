@@ -1,8 +1,18 @@
-/*
- * MyPCS - My Programming Contests Solutions
+/* MyPCS - My Programming Contests Solutions
+ *
+ * email: fernandohbc@gmail.com
+ * Google+: plus.google.com/117689849496467534996
+ *  
  * 
- * Copyright (C) 2007 - 2011  Fernando Cardoso
- * email: fernandohbc@gmail.com / twitter: fernando_hbc
+ * SPOILER ALERT!
+ * These are the solutions for problems from Programming Contests and Online
+ * Judges. Seeing an accepted code before getting accepted by oneself is uncool.
+ * 
+ * Q: So why are the solutions being made available?
+ * A: For educational purposes only. Some of the problems can be used in Contests
+ * training (even if it is to show how NOT to do :-) ) and also can serve to
+ * compare solutions and algorithms. Also, the author thinks it is cool to have
+ * his code well versioned.
  * 
  * The source code of this program is free software; you can do whatever you
  * want with it since you always keep the name and contact of the original
@@ -28,100 +38,100 @@ import java.util.StringTokenizer;
 
 class P11491_3747 {
 
-    public static void main(String[] args) {
-        try {
-            (new P11491_3747()).begin();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+  public static void main(String[] args) {
+    try {
+      (new P11491_3747()).begin();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
+  }
 
-    private void begin() throws IOException {
-        // Scanner scn = new Scanner(System.in);
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-        // String ln = scn.nextLine();
-        String ln = in.readLine();
-        StringTokenizer st = new StringTokenizer(ln);
-        int d = Integer.parseInt(st.nextToken());
-        int n = Integer.parseInt(st.nextToken());
-        while (d != 0 || n != 0) {
-            // String num = scn.nextLine();
-            String num = in.readLine();
-            Lista head = null;
-            Lista tail = null;
-            for (int p = 0; p < d; p++) {
-                Lista elm = new Lista(num.charAt(p));
-                if (head == null) {
-                    head = elm;
-                }
-                if (tail != null) {
-                    tail.setNext(elm);
-                }
-                tail = elm;
-            }
-            Lista elm = head;
-            int del = 0;
-            while (del < n && elm != null && elm.getNext() != null) {
-                if (elm.getChar() < elm.getNext().getChar()) {
-                    if (elm.getPrev() != null) {
-                        elm.getPrev().setNext(elm.getNext());
-                        elm = elm.getNext().getPrev();
-                    } else {
-                        head = elm.getNext();
-                        elm = elm.getNext();
-                        elm.setPrev(null);
-                    }
-                    del++;
-                } else {
-                    elm = elm.getNext();
-                }
-            }
-            elm = head;
-            for (int o = 0; o < (d - n); o++) {
-                sb.append(elm.getChar());
-                elm = elm.getNext();
-            }
-            sb.append("\n");
-            ln = in.readLine();
-            st = new StringTokenizer(ln);
-            d = Integer.parseInt(st.nextToken());
-            n = Integer.parseInt(st.nextToken());
+  private void begin() throws IOException {
+    // Scanner scn = new Scanner(System.in);
+    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    StringBuilder sb = new StringBuilder();
+    // String ln = scn.nextLine();
+    String ln = in.readLine();
+    StringTokenizer st = new StringTokenizer(ln);
+    int d = Integer.parseInt(st.nextToken());
+    int n = Integer.parseInt(st.nextToken());
+    while (d != 0 || n != 0) {
+      // String num = scn.nextLine();
+      String num = in.readLine();
+      Lista head = null;
+      Lista tail = null;
+      for (int p = 0; p < d; p++) {
+        Lista elm = new Lista(num.charAt(p));
+        if (head == null) {
+          head = elm;
         }
-        System.out.print(sb);
+        if (tail != null) {
+          tail.setNext(elm);
+        }
+        tail = elm;
+      }
+      Lista elm = head;
+      int del = 0;
+      while (del < n && elm != null && elm.getNext() != null) {
+        if (elm.getChar() < elm.getNext().getChar()) {
+          if (elm.getPrev() != null) {
+            elm.getPrev().setNext(elm.getNext());
+            elm = elm.getNext().getPrev();
+          } else {
+            head = elm.getNext();
+            elm = elm.getNext();
+            elm.setPrev(null);
+          }
+          del++;
+        } else {
+          elm = elm.getNext();
+        }
+      }
+      elm = head;
+      for (int o = 0; o < (d - n); o++) {
+        sb.append(elm.getChar());
+        elm = elm.getNext();
+      }
+      sb.append("\n");
+      ln = in.readLine();
+      st = new StringTokenizer(ln);
+      d = Integer.parseInt(st.nextToken());
+      n = Integer.parseInt(st.nextToken());
     }
+    System.out.print(sb);
+  }
 }
 
 class Lista {
-    public Lista(char c) {
-        this.next = null;
-        this.element = c;
-        this.prev = null;
-    }
+  public Lista(char c) {
+    next = null;
+    element = c;
+    prev = null;
+  }
 
-    public void setPrev(Lista prev) {
-        this.prev = prev;
-    }
+  public void setPrev(Lista prev) {
+    this.prev = prev;
+  }
 
-    public Lista getPrev() {
-        return this.prev;
-    }
+  public Lista getPrev() {
+    return prev;
+  }
 
-    public Lista getNext() {
-        return this.next;
-    }
+  public Lista getNext() {
+    return next;
+  }
 
-    public char getChar() {
-        return this.element;
-    }
+  public char getChar() {
+    return element;
+  }
 
-    public void setNext(Lista elm) {
-        this.next = elm;
-        elm.prev = this;
-    }
+  public void setNext(Lista elm) {
+    next = elm;
+    elm.prev = this;
+  }
 
-    private Lista prev;
-    private final char element;
-    private Lista next;
+  private Lista prev;
+  private final char element;
+  private Lista next;
 }

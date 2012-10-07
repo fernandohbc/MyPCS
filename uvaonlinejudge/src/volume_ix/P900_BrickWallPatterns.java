@@ -35,25 +35,25 @@ import java.util.Scanner;
 
 /**
  * UVa Online Judge Problem #900 - Brick Wall Patterns
- *
+ * 
  * @author Fernando Cardoso (fernandohbc@gmail.com)
  */
-public class Main {
-  private static long [] fib = new long[51];
-  static {
-    fib[0] = 1;
-    fib[1] = 1;
-    for (int i = 2; i <= 50; i++) {
-      fib[i] = fib[i-1] + fib[i-2];
+public class P900_BrickWallPatterns {
+    private static long[] fib = new long[51];
+    static {
+        fib[0] = 1;
+        fib[1] = 1;
+        for (int i = 2; i <= 50; i++) {
+            fib[i] = fib[i - 1] + fib[i - 2];
+        }
     }
-  }
 
-  public static void main(String [] args) {
-    Scanner scn = new Scanner(System.in);
-    int n = scn.nextInt();
-    while (n != 0) {
-      System.out.println(fib[n]);
-      n = scn.nextInt();
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+        while (n != 0) {
+            System.out.println(fib[n]);
+            n = scn.nextInt();
+        }
     }
-  }
 }

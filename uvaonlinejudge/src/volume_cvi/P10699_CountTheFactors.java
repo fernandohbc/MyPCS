@@ -1,6 +1,5 @@
 /* MyPCS - My Programming Contests Solutions
  *
- * Copyright (C) 2007 - 2012  Fernando Cardoso
  * email: fernandohbc@gmail.com
  * Google+: plus.google.com/117689849496467534996
  *  
@@ -39,38 +38,38 @@ import java.util.Scanner;
  * UVa Online Judge Problem #10699 - Count the Factors
  */
 public class P10699_CountTheFactors {
-  private static int MAX = 1000000;
-  private static List<Integer> primes;
-  static {
-    primes = new LinkedList<Integer>();
-    boolean [] siege = new boolean[MAX + 1];
-    for (int i = 2; i <= MAX; i++) {
-      if (!siege[i]) {
-        for (int k = 2*i; k <= MAX; k += i) {
-          siege[k] = true;
+    private static int MAX = 1000000;
+    private static List<Integer> primes;
+    static {
+        primes = new LinkedList<Integer>();
+        boolean[] siege = new boolean[MAX + 1];
+        for (int i = 2; i <= MAX; i++) {
+            if (!siege[i]) {
+                for (int k = 2 * i; k <= MAX; k += i) {
+                    siege[k] = true;
+                }
+                primes.add(i);
+            }
         }
-        primes.add(i);
-      }
     }
-  }
 
-  public static void main(String [] args) {
-    Scanner scn = new Scanner(System.in);
-    int n = scn.nextInt();
-    while (n != 0) {
-      int cp = n;
-      int count = 0;
-      for (Integer prime : primes) {
-        if (n%prime == 0) {
-          count++;
-          n /= prime;
-          if (n == 1) {
-            break;
-          }
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+        while (n != 0) {
+            int cp = n;
+            int count = 0;
+            for (Integer prime : primes) {
+                if (n % prime == 0) {
+                    count++;
+                    n /= prime;
+                    if (n == 1) {
+                        break;
+                    }
+                }
+            }
+            System.out.println(cp + " : " + count);
+            n = scn.nextInt();
         }
-      }
-      System.out.println(cp + " : " + count);
-      n = scn.nextInt();
     }
-  }
 }
