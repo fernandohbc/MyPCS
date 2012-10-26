@@ -1,6 +1,5 @@
 /* MyPCS - My Programming Contests Solutions
  *
- * Copyright (C) 2007 - 2012  Fernando Cardoso
  * email: fernandohbc@gmail.com
  * Google+: plus.google.com/117689849496467534996
  *  
@@ -29,21 +28,22 @@
  * If you find this really useful, you can buy a kid a book, and help making
  * the world more literate.
  */
+
 package volume_civ;
 
 import java.util.Scanner;
 
 /**
  * UVa Online Judge Problem #10499 - The Land Of Justice
- *
+ * 
  * @author Fernando Cardoso (fernandohbc@gmail.com)
  */
 public class P10499_TheLandOfJustice {
-  public static void main(String [] args) {
+  public static void main(String[] args) {
     Scanner scn = new Scanner(System.in);
     long n = scn.nextInt();
     while (n >= 0) {
-      System.out.println((n==1?0:n*25L) + "%");
+      System.out.println((n == 1 ? 0 : n * 25L) + "%");
       n = scn.nextInt();
     }
   }

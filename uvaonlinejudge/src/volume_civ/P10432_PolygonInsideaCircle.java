@@ -1,6 +1,5 @@
 /* MyPCS - My Programming Contests Solutions
  *
- * Copyright (C) 2007 - 2012  Fernando Cardoso
  * email: fernandohbc@gmail.com
  * Google+: plus.google.com/117689849496467534996
  *  
@@ -29,6 +28,7 @@
  * If you find this really useful, you can buy a kid a book, and help making
  * the world more literate.
  */
+
 package volume_civ;
 
 import static java.lang.Math.PI;
@@ -39,18 +39,18 @@ import java.util.Scanner;
 
 /**
  * UVa Online Judge Problem #10432 - Polygon Inside a Circle
- *
+ * 
  * @author Fernando Cardoso (fernandohbc@gmail.com)
  */
 public class P10432_PolygonInsideaCircle {
-  public static void main(String [] args) {
+  public static void main(String[] args) {
     Scanner scn = new Scanner(System.in);
     while (scn.hasNextDouble()) {
       double r = scn.nextDouble();
       double n = scn.nextDouble();
 
       // Aply the formula
-      double area = n * r * r * sin(PI/n) * cos(PI/n);
+      double area = n * r * r * sin(PI / n) * cos(PI / n);
 
       System.out.printf("%.3f\n", area);
     }

@@ -1,9 +1,18 @@
-/*
- * MyPCS - My Programming Contests Solutions
- * 
- * Copyright (C) 2007 - 2012  Fernando Cardoso
+/* MyPCS - My Programming Contests Solutions
+ *
  * email: fernandohbc@gmail.com
- * +Fernando: https://plus.google.com/117689849496467534996
+ * Google+: plus.google.com/117689849496467534996
+ *  
+ * 
+ * SPOILER ALERT!
+ * These are the solutions for problems from Programming Contests and Online
+ * Judges. Seeing an accepted code before getting accepted by oneself is uncool.
+ * 
+ * Q: So why are the solutions being made available?
+ * A: For educational purposes only. Some of the problems can be used in Contests
+ * training (even if it is to show how NOT to do :-) ) and also can serve to
+ * compare solutions and algorithms. Also, the author thinks it is cool to have
+ * his code well versioned.
  * 
  * The source code of this program is free software; you can do whatever you
  * want with it since you always keep the name and contact of the original
@@ -19,6 +28,7 @@
  * If you find this really useful, you can buy a kid a book, and help making
  * the world more literate.
  */
+
 //Problem P10323: Factorial! You Must be Kidding!!!
 package volume_ciii;
 

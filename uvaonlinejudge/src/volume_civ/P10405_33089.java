@@ -1,8 +1,18 @@
-/*
- * MyPCS - My Programming Contests Solutions
+/* MyPCS - My Programming Contests Solutions
+ *
+ * email: fernandohbc@gmail.com
+ * Google+: plus.google.com/117689849496467534996
+ *  
  * 
- * Copyright (C) 2007 - 2011  Fernando Cardoso
- * email: fernandohbc@gmail.com / twitter: fernando_hbc
+ * SPOILER ALERT!
+ * These are the solutions for problems from Programming Contests and Online
+ * Judges. Seeing an accepted code before getting accepted by oneself is uncool.
+ * 
+ * Q: So why are the solutions being made available?
+ * A: For educational purposes only. Some of the problems can be used in Contests
+ * training (even if it is to show how NOT to do :-) ) and also can serve to
+ * compare solutions and algorithms. Also, the author thinks it is cool to have
+ * his code well versioned.
  * 
  * The source code of this program is free software; you can do whatever you
  * want with it since you always keep the name and contact of the original
@@ -18,62 +28,70 @@
  * If you find this really useful, you can buy a kid a book, and help making
  * the world more literate.
  */
+
 // @JUDGE_ID:  33089  10405  Java  "Longest Common Subsequence"
 package volume_civ;
 
 class P10405_33089 {
-//	Rotina de Leitura
-	static String readLn() {
-        String newLine = System.getProperty("line.separator");
-        StringBuffer buffer = new StringBuffer();
-        int car = -1;
-        try {
-            car = System.in.read();
-            while ((car > 0) && (car != newLine.charAt(0))) {
-                buffer.append((char)car);
-                car = System.in.read();
-            }
-            if (car == newLine.charAt(0)) System.in.skip(newLine.length() - 1);
-        } catch (java.io.IOException e) { return (null); }
-        if ((car < 0) && (buffer.length() == 0)) return (null);
-        return (buffer.toString().trim());
+  // Rotina de Leitura
+  static String readLn() {
+    String newLine = System.getProperty("line.separator");
+    StringBuffer buffer = new StringBuffer();
+    int car = -1;
+    try {
+      car = System.in.read();
+      while ((car > 0) && (car != newLine.charAt(0))) {
+        buffer.append((char) car);
+        car = System.in.read();
+      }
+      if (car == newLine.charAt(0)) {
+        System.in.skip(newLine.length() - 1);
+      }
+    } catch (java.io.IOException e) {
+      return (null);
     }
-	
-	public static void main(String[] args) {
-		(new P10405_33089()).begin();
-	}	
-	
-	int lcs[][];
-	private void begin() {
-		String a = readLn();
-		while ( a != null ) {
-			String b = readLn();
-			int m = a.length();
-			int n = b.length();
-			lcs = new int[m+1][];
-			for ( int i = 0; i <= m; i++ ) {
-				lcs[i] = new int[n+1];
-				for ( int j = 0; j <= n; j++ ) {
-					lcs[i][j] = -1;
-				}
-			}
-			System.out.println(calcLcs(a,0,b,0));
-			a = readLn();
-		}
-	}
+    if ((car < 0) && (buffer.length() == 0)) {
+      return (null);
+    }
+    return (buffer.toString().trim());
+  }
 
-	private int calcLcs(String a, int i, String b, int j) {
-		if ( lcs[i][j] != -1 ) {
-			return lcs[i][j];
-		} else if ( i == a.length() || j == b.length() ) {
-			lcs[i][j] = 0;
-			return 0;
-		} else if ( a.charAt(i) == b.charAt(j)) {
-			lcs[i][j] = 1 + calcLcs(a, i+1, b, j+1);
-			return lcs[i][j];
-		} else {
-			lcs[i][j] = Math.max( calcLcs(a, i+1, b, j), calcLcs(a, i, b, j+1 ) ); 
-			return lcs[i][j];
-		}
-	}
+  public static void main(String[] args) {
+    (new P10405_33089()).begin();
+  }
+
+  int lcs[][];
+
+  private void begin() {
+    String a = readLn();
+    while (a != null) {
+      String b = readLn();
+      int m = a.length();
+      int n = b.length();
+      lcs = new int[m + 1][];
+      for (int i = 0; i <= m; i++) {
+        lcs[i] = new int[n + 1];
+        for (int j = 0; j <= n; j++) {
+          lcs[i][j] = -1;
+        }
+      }
+      System.out.println(calcLcs(a, 0, b, 0));
+      a = readLn();
+    }
+  }
+
+  private int calcLcs(String a, int i, String b, int j) {
+    if (lcs[i][j] != -1) {
+      return lcs[i][j];
+    } else if (i == a.length() || j == b.length()) {
+      lcs[i][j] = 0;
+      return 0;
+    } else if (a.charAt(i) == b.charAt(j)) {
+      lcs[i][j] = 1 + calcLcs(a, i + 1, b, j + 1);
+      return lcs[i][j];
+    } else {
+      lcs[i][j] = Math.max(calcLcs(a, i + 1, b, j), calcLcs(a, i, b, j + 1));
+      return lcs[i][j];
+    }
+  }
 }

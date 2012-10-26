@@ -1,8 +1,18 @@
-/*
- * MyPCS - My Programming Contests Solutions
+/* MyPCS - My Programming Contests Solutions
+ *
+ * email: fernandohbc@gmail.com
+ * Google+: plus.google.com/117689849496467534996
+ *  
  * 
- * Copyright (C) 2007 - 2011  Fernando Cardoso
- * email: fernandohbc@gmail.com / twitter: fernando_hbc
+ * SPOILER ALERT!
+ * These are the solutions for problems from Programming Contests and Online
+ * Judges. Seeing an accepted code before getting accepted by oneself is uncool.
+ * 
+ * Q: So why are the solutions being made available?
+ * A: For educational purposes only. Some of the problems can be used in Contests
+ * training (even if it is to show how NOT to do :-) ) and also can serve to
+ * compare solutions and algorithms. Also, the author thinks it is cool to have
+ * his code well versioned.
  * 
  * The source code of this program is free software; you can do whatever you
  * want with it since you always keep the name and contact of the original
@@ -18,6 +28,7 @@
  * If you find this really useful, you can buy a kid a book, and help making
  * the world more literate.
  */
+
 package volume_civ;
 
 import java.util.Scanner;
@@ -30,36 +41,36 @@ import java.util.TreeMap;
  * 
  */
 public class P10420_ListOfConquests {
-    public static void main(String[] args) {
-        Scanner scn = new Scanner(System.in);
+  public static void main(String[] args) {
+    Scanner scn = new Scanner(System.in);
 
-        int n = Integer.parseInt(scn.nextLine().trim());
-        TreeMap<String, Country> map = new TreeMap<String, Country>();
-        for (int i = 0; i < n; i++) {
-            String name = scn.nextLine();
-            name = name.substring(0, name.indexOf(' '));
+    int n = Integer.parseInt(scn.nextLine().trim());
+    TreeMap<String, Country> map = new TreeMap<String, Country>();
+    for (int i = 0; i < n; i++) {
+      String name = scn.nextLine();
+      name = name.substring(0, name.indexOf(' '));
 
-            Country country = map.get(name.toUpperCase());
-            if (country == null) {
-                country = new Country(name);
-                map.put(name.toUpperCase(), country);
-            }
-            country.count++;
-        }
-
-        for (Country country : map.values()) {
-            System.out.println(country.name + " " + country.count);
-        }
+      Country country = map.get(name.toUpperCase());
+      if (country == null) {
+        country = new Country(name);
+        map.put(name.toUpperCase(), country);
+      }
+      country.count++;
     }
+
+    for (Country country : map.values()) {
+      System.out.println(country.name + " " + country.count);
+    }
+  }
 }
 
 class Country {
 
-    String name;
-    int count;
+  String name;
+  int count;
 
-    public Country(String name) {
-        this.name = name;
-    }
+  public Country(String name) {
+    this.name = name;
+  }
 
 }

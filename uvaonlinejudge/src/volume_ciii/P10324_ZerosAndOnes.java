@@ -1,6 +1,5 @@
 /* MyPCS - My Programming Contests Solutions
  *
- * Copyright (C) 2007 - 2012  Fernando Cardoso
  * email: fernandohbc@gmail.com
  * Google+: plus.google.com/117689849496467534996
  *  
@@ -29,6 +28,7 @@
  * If you find this really useful, you can buy a kid a book, and help making
  * the world more literate.
  */
+
 package volume_ciii;
 
 import java.util.LinkedList;
@@ -41,20 +41,20 @@ import java.util.Scanner;
  * @author Fernando Cardoso (fernandohbc@gmail.com)
  */
 public class P10324_ZerosAndOnes {
-  public static void main(String [] args) {
+  public static void main(String[] args) {
     Scanner scn = new Scanner(System.in);
     int tc = 1;
     while (scn.hasNextLine()) {
       System.out.println("Case " + tc++ + ":");
       String line = scn.nextLine();
-      Interval [] intervals = parse(line);
+      Interval[] intervals = parse(line);
 
       int q = scn.nextInt();
       for (int i = 0; i < q; i++) {
         Interval query = new Interval(scn);
         boolean isAllSame = isAllSame(query, intervals);
 
-        System.out.println(isAllSame?"Yes":"No");
+        System.out.println(isAllSame ? "Yes" : "No");
       }
 
       // Let go the rest of the line
@@ -62,17 +62,18 @@ public class P10324_ZerosAndOnes {
     }
   }
 
-  private static boolean isAllSame(Interval query, Interval [] intervals) {
+  private static boolean isAllSame(Interval query, Interval[] intervals) {
     Interval overlapping = getOverlappingInterval(query, intervals);
     return (query.start >= overlapping.start && query.end <= overlapping.end);
   }
 
-  private static Interval getOverlappingInterval(Interval query, Interval [] intervals) {
+  private static Interval getOverlappingInterval(Interval query,
+      Interval[] intervals) {
     int b = 0;
     int e = intervals.length;
 
-    while (b<=e) {
-      int m = (b+e)/2;
+    while (b <= e) {
+      int m = (b + e) / 2;
       Interval median = intervals[m];
       if (median.start <= query.start && median.end >= query.start) {
         return median;
@@ -80,9 +81,9 @@ public class P10324_ZerosAndOnes {
 
       // Update search range
       if (median.start > query.start) {
-        e = m-1;
+        e = m - 1;
       } else {
-        b = m+1;
+        b = m + 1;
       }
     }
 
@@ -91,19 +92,19 @@ public class P10324_ZerosAndOnes {
 
   private static Interval[] parse(String line) {
     List<Interval> intervalList = new LinkedList<Interval>();
-    char [] lineArr = line.toCharArray(); 
+    char[] lineArr = line.toCharArray();
     char currChar = lineArr[0];
     int currStart = 0;
     for (int i = 1; i < lineArr.length; i++) {
       if (lineArr[i] != currChar) {
-        intervalList.add(new Interval(currStart, i-1));
+        intervalList.add(new Interval(currStart, i - 1));
         currStart = i;
         currChar = lineArr[i];
       }
     }
 
     // For the last interval
-    intervalList.add(new Interval(currStart, lineArr.length-1));
+    intervalList.add(new Interval(currStart, lineArr.length - 1));
 
     return intervalList.toArray(new Interval[0]);
   }
@@ -113,8 +114,8 @@ public class P10324_ZerosAndOnes {
     int end;
 
     Interval(int a, int b) {
-      this.start = Math.min(a,b);
-      this.end = Math.max(a,b);
+      start = Math.min(a, b);
+      end = Math.max(a, b);
     }
 
     Interval(Scanner scn) {

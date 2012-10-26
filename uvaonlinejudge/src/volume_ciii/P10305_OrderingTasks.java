@@ -1,6 +1,5 @@
 /* MyPCS - My Programming Contests Solutions
  *
- * Copyright (C) 2007 - 2012  Fernando Cardoso
  * email: fernandohbc@gmail.com
  * Google+: plus.google.com/117689849496467534996
  *  
@@ -29,22 +28,22 @@
  * If you find this really useful, you can buy a kid a book, and help making
  * the world more literate.
  */
+
 package volume_ciii;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.HashSet;
-import java.util.HashMap;
 
 public class P10305_OrderingTasks {
-  public static void main(String [] args) {
+  public static void main(String[] args) {
     Scanner scn = new Scanner(System.in);
     int v = scn.nextInt();
     int e = scn.nextInt();
-    while (v != 0 || e !=0) {
+    while (v != 0 || e != 0) {
       // Initialize no incoming set
       TreeSet<Integer> noIncoming = new TreeSet<Integer>();
       for (int i = 1; i <= v; i++) {
@@ -72,9 +71,9 @@ public class P10305_OrderingTasks {
 
         // remove edges
         Set<Integer> outgoing = out.remove(from);
-        if (outgoing != null ) {
+        if (outgoing != null) {
           for (int to : outgoing) {
-            Set<Integer> fromSet = in.get(to); 
+            Set<Integer> fromSet = in.get(to);
             fromSet.remove(from);
             if (fromSet.isEmpty()) {
               noIncoming.add(to);
@@ -98,7 +97,7 @@ public class P10305_OrderingTasks {
       outBuff.append(i);
       outBuff.append(" ");
     }
-    outBuff.setLength(outBuff.length()-1);
+    outBuff.setLength(outBuff.length() - 1);
     System.out.println(outBuff.toString());
   }
 
